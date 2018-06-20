@@ -15,7 +15,7 @@ mongoose.connect('mongodb://harshDB:db12345@ds161700.mlab.com:61700/flight-serve
     }
 });
 
-// app.use('/routes',root);
+
 app.listen(3500,function(){
     console.log('server is runnig on port 3000');
 });
