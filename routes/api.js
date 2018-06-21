@@ -8,5 +8,5 @@ router.get('/', function (req, res) {
     });
 });
 
-router.get('/get',flightController.check)
+router.post('/get',flightController.check)
 module.exports = router;
