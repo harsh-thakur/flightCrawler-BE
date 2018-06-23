@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -8,13 +9,13 @@ const bodyParser= require('body-parser');
 app.use(bodyParser());
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://harshDB:db12345@ds161700.mlab.com:61700/flight-server', function (err) {
-    if (err) {
-        console.log(err);
-    } else {
-        console.log('connected');
-    }
+mongoose.connect(process.env.mongodbConnectionString,function(err){
+    if(err)
+    console.log(err);
+    else
+    console.log('connected..')
 });
+
 
 
 //Using CORS
