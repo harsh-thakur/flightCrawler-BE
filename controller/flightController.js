@@ -29,7 +29,7 @@ exports.check = async (req,res) => {
     //amadeus API
 
 
-    const apiKey = "WePVAZk1sD4KYLkeHvTppphxhhJFzRGL";
+    const apiKey = process.env.API_KEY;
     const origin = req.body.origin;
     const dest = req.body.dest;
     const d = req.body.date;
