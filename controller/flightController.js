@@ -32,73 +32,108 @@ exports.check = async (req,res) => {
     const apiKey = process.env.API_KEY;
     const origin = req.body.origin;
     const dest = req.body.dest;
-    const d = req.body.date;
+    const d = req.body.originDate;
+    const rd = req.body.returnDate;
+    const preference = req.body.prefer;
+    const opt = !req.body.option;
 
 
-    let originValue;
-    let destinationValue;
+    let originValue = origin;
+    let destinationValue = dest;
       // To get the city code
 
 
 
 
-     request({
-      method: 'GET',
-      uri:`https://api.sandbox.amadeus.com/v1.2/airports/autocomplete?apikey=${apiKey}&term=${origin}&country=IN`
-    }, function (error, response, body){
-      if(!error && response.statusCode == 200){
-       body = JSON.parse(body);
-       if(body.length == 0){
-         res.json({
-           'success': false,
-           msg: 'Either Source or Destination is wrong'
-         })
-       }
-       else{
-       originValue = body[0].value;
-       }
-      //  console.log(originValue);
+    //  request({
+    //   method: 'GET',
+    //   uri:`https://api.sandbox.amadeus.com/v1.2/airports/autocomplete?apikey=${apiKey}&term=${origin}&country=IN`
+    // }, function (error, response, body){
+    //   if(!error && response.statusCode == 200){
+    //    body = JSON.parse(body);
+    //    if(body.length == 0){
+    //      res.json({
+    //        'success': false,
+    //        msg: 'Either Source or Destination is wrong'
+    //      })
+    //    }
+    //    else{
+    //    originValue = body[0].value;
+    //    }
+    //   //  console.log(originValue);
        
-      }
-    })
+    //   }
+    // })
 
-    request({
-      method: 'GET',
-      uri:`https://api.sandbox.amadeus.com/v1.2/airports/autocomplete?apikey=${apiKey}&term=${dest}&country=IN`
-    }, function (error, response, body){
-      if(!error && response.statusCode == 200){
-       body = JSON.parse(body);
-       if(body.length == 0){
-        res.json({
-          'success': false,
-          msg: 'Either Source or Destination is wrong'
-        })
-      }
-      else{
-        destinationValue= body[0].value;
+    // request({
+    //   method: 'GET',
+    //   uri:`https://api.sandbox.amadeus.com/v1.2/airports/autocomplete?apikey=${apiKey}&term=${dest}&country=IN`
+    // }, function (error, response, body){
+    //   if(!error && response.statusCode == 200){
+    //    body = JSON.parse(body);
+    //    if(body.length == 0){
+    //     res.json({
+    //       'success': false,
+    //       msg: 'Either Source or Destination is wrong'
+    //     })
+    //   }
+    //   else{
+    //     destinationValue= body[0].value;
 
-      }
-      //  console.log(destinationValue);
+    //     console.log(destinationValue);
+    //   }
        
-      }
-    })
-    setTimeout(function(){
-      let url = `https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=${apiKey}&origin=${originValue}&destination=${destinationValue}&departure_date=${d}&currency=INR`
-      request({
-            method: 'GET',
-            uri: url
-          }, function (error, response, body){
-            if(!error && response.statusCode == 200){
-             body = JSON.parse(body);
-              res.json({
-                  'success': true,
-                  data:body
-              });
-            }
-          })
+    //   }
+    // })
 
+    if(preference == "all"){
+      console.log('har');
+      
+      setTimeout(function(){
+        let url = `https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=${apiKey}&origin=${originValue}&destination=${destinationValue}&departure_date=${d}&nonstop=${opt}&currency=INR`
+        request({
+              method: 'GET',
+              uri: url
+            }, function (error, response, body){
+              if(!error && response.statusCode == 200){
+               body = JSON.parse(body);         
+                res.json({
+                    'success': true,
+                    data:body
+                });
+              }
+            })
+  
+  
+      },3000);
+    }
+    else{
+      setTimeout(function(){
+        let url = `https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=${apiKey}&origin=${originValue}&destination=${destinationValue}&departure_date=${d}&include_airlines=${preference}&nonstop=${opt}&currency=INR`
+        request({
+              method: 'GET',
+              uri: url
+            }, function (error, response, body){
+              if(!error && response.statusCode == 200){
+               body = JSON.parse(body);         
+                res.json({
+                    'success': true,
+                    data:body
+                });
+              }
+              else{
+                res.json({
+                  'success':false,
+                  msg: response
+                })
+              }
+            })
+  
+  
+      },3000);
+  
+    }
 
-    },3000);
 
  
     
