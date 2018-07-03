@@ -29,7 +29,8 @@ exports.check = async (req,res) => {
     //amadeus API
 
 
-    const apiKey = process.env.API_KEY;
+    //const apiKey = process.env.API_KEY;
+// const apikey = "tCh0GDqllwJiVaWuuKEutSiSgd2KG6Xq"
     const origin = req.body.origin;
     const dest = req.body.dest;
     const d = req.body.originDate;
@@ -90,7 +91,7 @@ exports.check = async (req,res) => {
       console.log('har');
       
       setTimeout(function(){
-        let url = `https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=${apiKey}&origin=${originValue}&destination=${destinationValue}&departure_date=${d}&nonstop=${opt}&currency=INR`
+        let url = `https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=tCh0GDqllwJiVaWuuKEutSiSgd2KG6Xq&origin=${originValue}&destination=${destinationValue}&departure_date=${d}&nonstop=${opt}&currency=INR`
         request({
               method: 'GET',
               uri: url
@@ -104,6 +105,12 @@ exports.check = async (req,res) => {
                     data:body
                 });
               }
+              else{
+                res.json({
+                  'success':false,
+                  msg:response
+                })
+              }
             })
   
   
@@ -111,7 +118,7 @@ exports.check = async (req,res) => {
     }
     else{
       setTimeout(function(){
-        let url = `https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=${apiKey}&origin=${originValue}&destination=${destinationValue}&departure_date=${d}&include_airlines=${preference}&nonstop=${opt}&currency=INR`
+        let url = `https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=tCh0GDqllwJiVaWuuKEutSiSgd2KG6Xq&origin=${originValue}&destination=${destinationValue}&departure_date=${d}&include_airlines=${preference}&nonstop=${opt}&currency=INR`
         request({
               method: 'GET',
               uri: url

@@ -40,7 +40,7 @@ app.get("/",(req,res)=>{
     res.send("<h3>Har Har Mahadev<\h3>")
 })
 // app.use('/routes',root);
-app.listen(3500,function(req,res){
+app.listen(process.env.port || 5000,function(req,res){
    
     console.log('server is runnig on port 3500');
 });
