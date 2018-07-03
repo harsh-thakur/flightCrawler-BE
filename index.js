@@ -9,12 +9,12 @@ const bodyParser= require('body-parser');
 app.use(bodyParser());
 const mongoose = require('mongoose');
 
-mongoose.connect(process.env.mongodbConnectionString,function(err){
-    if(err)
-    console.log(err);
-    else
-    console.log('connected..')
-});
+// mongoose.connect(process.env.mongodbConnectionString,function(err){
+//     if(err)
+//     console.log(err);
+//     else
+//     console.log('connected..')
+// });
 
 
 

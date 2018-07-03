@@ -96,7 +96,9 @@ exports.check = async (req,res) => {
               uri: url
             }, function (error, response, body){
               if(!error && response.statusCode == 200){
-               body = JSON.parse(body);         
+               body = JSON.parse(body);   
+               console.log(body);
+                     
                 res.json({
                     'success': true,
                     data:body
@@ -115,7 +117,9 @@ exports.check = async (req,res) => {
               uri: url
             }, function (error, response, body){
               if(!error && response.statusCode == 200){
-               body = JSON.parse(body);         
+               body = JSON.parse(body); 
+               console.log("inside", body);
+                       
                 res.json({
                     'success': true,
                     data:body
