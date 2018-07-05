@@ -9,4 +9,5 @@ router.get('/', function (req, res) {
 });
 
 router.post('/get',flightController.check)
+router.post('/fetchAllCities', flightController.getCities);
 module.exports = router;
