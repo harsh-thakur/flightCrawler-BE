@@ -5,7 +5,7 @@ exports.getCities = async (req,res) => {
   var cityName = req.body.search;
   request({
     method: 'GET',
-    uri:`https://api.sandbox.amadeus.com/v1.2/airports/autocomplete?apikey=UAO5y8RVFNw3TRGoWhH446VAYbNqH3Z8&term=${cityName}&country=IN`
+    uri:`https://api.sandbox.amadeus.com/v1.2/airports/autocomplete?apikey=GnRBM00bILjYAFLqCZEA1XnCFKPAwnGg&term=${cityName}&country=IN`
   }, function (error, response, body){
     console.log(body);
     if(!error && response.statusCode == 200){
@@ -123,7 +123,7 @@ exports.check = async (req,res) => {
       console.log('har');
       
       setTimeout(function(){
-        let url = `https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=UAO5y8RVFNw3TRGoWhH446VAYbNqH3Z8&origin=${originValue}&destination=${destinationValue}&departure_date=${d}&nonstop=${opt}&currency=INR`
+        let url = `https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=GnRBM00bILjYAFLqCZEA1XnCFKPAwnGg&origin=${originValue}&destination=${destinationValue}&departure_date=${d}&nonstop=${opt}&currency=INR`
         request({
               method: 'GET',
               uri: url
@@ -150,7 +150,7 @@ exports.check = async (req,res) => {
     }
     else{
       setTimeout(function(){
-        let url = `https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=UAO5y8RVFNw3TRGoWhH446VAYbNqH3Z8&origin=${originValue}&destination=${destinationValue}&departure_date=${d}&include_airlines=${preference}&nonstop=${opt}&currency=INR`
+        let url = `https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=GnRBM00bILjYAFLqCZEA1XnCFKPAwnGg&origin=${originValue}&destination=${destinationValue}&departure_date=${d}&include_airlines=${preference}&nonstop=${opt}&currency=INR`
         request({
               method: 'GET',
               uri: url
